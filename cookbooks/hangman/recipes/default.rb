@@ -30,6 +30,10 @@ template "/etc/httpd/conf.d/proxy_ajp.conf" do
     source "proxy_ajp.conf.erb"
 end
 
+template "/usr/share/tomcat6/conf/server.xml" do
+    source "server.xml.erb"
+end
+
 service 'httpd' do
     action :restart
 end
