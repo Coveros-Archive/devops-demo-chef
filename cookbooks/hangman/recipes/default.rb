@@ -7,14 +7,14 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'apache2::mod_proxy'
+include_recipe 'apache2::mod_proxy_ajp'
+
 dbi = Chef::DataBagItem.load("chef_demo", "nexus")
-my_user = dbi['user']
-my_password = dbi['password']
-base_url = 'https://#{my_user}:#{my_password}@jenkins.demo.secureci.com/nexus/content/repositories/snapshots'
 
 yum_repository 'secureci-nexus' do
     description 'SecureCI Nexus Repo for the Demo'
-    baseurl base_url
+    baseurl "https://#{dbi['user']}:#{dbi['password']}@jenkins.demo.secureci.com/nexus/content/repositories/snapshots"
     gpgcheck false
     enabled true
     mirror_expire "30"
@@ -24,4 +24,12 @@ end
 
 package 'hangman' do
     action :install
+end
+
+template "/etc/httpd/conf.d/proxy_ajp.conf" do
+    source "proxy_ajp.conf.erb"
+end
+
+service 'httpd' do
+    action :restart
 end
