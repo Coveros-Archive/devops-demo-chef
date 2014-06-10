@@ -8,6 +8,7 @@
 .rbenv-version
 vendor/*
 *.lock
+data_bags/*
 
 # Emacs
 *~

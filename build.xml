@@ -1,4 +1,5 @@
 <project>
+    <property name="node_name" value="devops.demo.chef"/>
     <target name="clean">
         <sequential>
             <exec executable="knife">
@@ -7,7 +8,7 @@
                 <arg value="delete" />
                 <arg value="-P" />
                 <arg value="-N" />
-                <arg value="aol.demo.chef" />
+                <arg value="${node_name}" />
                 <arg value="--yes"/>
             </exec>
         </sequential>
@@ -19,6 +20,7 @@
             <copy todir=".chef">
                 <fileset dir="/var/lib/jenkins/.chef" />
             </copy>
+            <delete file="params_test.txt" failonerror="false"/>
             <exec executable="knife">
                 <arg value="ec2" />
                 <arg value="server" />
@@ -26,7 +28,7 @@
                 <arg value="--availability-zone" />
                 <arg value="us-east-1a"/>
                 <arg value="--node-name" />
-                <arg value="aol.demo.chef"/>
+                <arg value="${node_name}"/>
                 <arg value="--flavor" />
                 <arg value="t1.micro"/>
                 <arg value="--image" />
@@ -39,6 +41,9 @@
                 <arg value="'role[hangman]'" />
                 <arg value="--ssh-user" />
                 <arg value="ec2-user" />
+            </exec>
+            <exec executable="./getNodeData.sh">
+                <arg value="${node_name}" />
             </exec>
         </sequential>
     </target>
