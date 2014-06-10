@@ -2,18 +2,8 @@
     <property name="node_name" value="devops.demo.chef"/>
     <target name="clean">
         <sequential>
-            <exec executable="./getNodeId.sh" outputproperty="node_id">
+            <exec executable="./deleteNode.sh" outputproperty="node_id">
                 <arg value="${node_name}" />
-            </exec>
-            <exec executable="knife">
-                <arg value="ec2" />
-                <arg value="server" />
-                <arg value="delete" />
-                <arg value="${node_id}" />
-                <arg value="-P" />
-                <arg value="-N" />
-                <arg value="${node_name}" />
-                <arg value="--yes"/>
             </exec>
         </sequential>
     </target>
