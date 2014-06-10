@@ -1,0 +1,45 @@
+<project>
+    <target name="clean">
+        <sequential>
+            <exec executable="knife">
+                <arg value="ec2" />
+                <arg value="server" />
+                <arg value="delete" />
+                <arg value="-P" />
+                <arg value="-N" />
+                <arg value="aol.demo.chef" />
+                <arg value="--yes"/>
+            </exec>
+        </sequential>
+    </target>
+
+    <target name="provisionvm">
+        <sequential>
+            <mkdir dir=".chef"/>
+            <copy todir=".chef">
+                <fileset dir="/var/lib/jenkins/.chef" />
+            </copy>
+            <exec executable="knife">
+                <arg value="ec2" />
+                <arg value="server" />
+                <arg value="create" />
+                <arg value="--availability-zone" />
+                <arg value="us-east-1a"/>
+                <arg value="--node-name" />
+                <arg value="aol.demo.chef"/>
+                <arg value="--flavor" />
+                <arg value="t1.micro"/>
+                <arg value="--image" />
+                <arg value="ami-fb8e9292" />
+                <arg value="--ssh-key" />
+                <arg value="centos_ci_demo_template_key" />
+                <arg value="--identity-file" />
+                <arg value=".chef/centos_ci_demo_template_key.pem" />
+                <arg value="--run-list" />
+                <arg value="'role[hangman]'" />
+                <arg value="--ssh-user" />
+                <arg value="ec2-user" />
+            </exec>
+        </sequential>
+    </target>
+</project>
