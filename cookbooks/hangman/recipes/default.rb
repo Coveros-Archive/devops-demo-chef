@@ -34,6 +34,6 @@ template "/usr/share/tomcat6/conf/server.xml" do
     source "server.xml.erb"
 end
 
-service 'httpd' do
+server 'apache2' do
     action :restart
 end
