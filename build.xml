@@ -24,7 +24,7 @@
                 <arg value="--node-name" />
                 <arg value="${node_name}"/>
                 <arg value="--flavor" />
-                <arg value="t1.micro"/>
+                <arg value="m1.small"/>
                 <arg value="--image" />
                 <arg value="ami-fb8e9292" />
                 <arg value="--ssh-key" />
