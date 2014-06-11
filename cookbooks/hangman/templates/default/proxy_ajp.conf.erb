@@ -1,7 +1,15 @@
-# hangman Proxy                                                                                                                                                                          
-ProxyPass         /hangman  ajp://localhost:8009/hangman                                                                                                                                 
-ProxyPassReverse  /hangman  ajp://localhost:8009/hangman                                                                                                                                 
-<Proxy ajp://localhost:8009/hangman*>                                                                                                                                                    
-  Order deny,allow                                                                                                                                                                       
-  Allow from all                                                                                                                                                                         
-</Proxy>   
+# hangman Proxy
+<VirtualHost *:80>
+    ServerName hangman
+    ServerAlias hangman
+    ProxyRequests Off
+    ProxyPreserveHost On
+
+    ProxyPass         /hangman  http://localhost:8080/hangman            
+    ProxyPassReverse  /hangman  http://localhost:8080/hangman
+    
+    <Proxy http://localhost:8080/hangman*>
+        Order allow,deny
+        Allow from all
+    </Proxy>
+</VirtualHost>
