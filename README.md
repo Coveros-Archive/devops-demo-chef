@@ -29,3 +29,5 @@ Roles provide logical grouping of cookbooks and other roles. A sample role can b
 Getting Started
 -------------------------
 Now that you have the chef-repo ready to go, check out [Learn Chef](https://learnchef.opscode.com/quickstart/workstation-setup/) to proceed with your workstation setup. If you have any questions about Enterprise Chef you can always ask [our support team](https://www.opscode.com/support/tickets/new) for a helping hand.
+
+test
