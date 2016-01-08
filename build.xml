@@ -35,6 +35,8 @@
                 <arg value="'role[hangman]'" />
                 <arg value="--ssh-user" />
                 <arg value="ec2-user" />
+                <arg value="--config" />
+                <arg value="~tomcat7/.chef/knife.rb" />
             </exec>
             <exec executable="./getNodeData.sh">
                 <arg value="${node_name}" />
